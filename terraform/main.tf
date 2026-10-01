@@ -43,11 +43,11 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 21.0"
 
-  cluster_name    = var.cluster_name
-  cluster_version = var.cluster_version
+  name               = var.cluster_name
+  kubernetes_version = var.cluster_version
 
   # Auto Mode — EKS manages node groups, kube-proxy, CoreDNS, etc.
-  cluster_compute_config = {
+  compute_config = {
     enabled    = true
     node_pools = ["general-purpose", "system"]
   }
@@ -56,20 +56,20 @@ module "eks" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
-  # Security: enable private endpoint, public for initial kubectl access
-  cluster_endpoint_public_access  = true
-  cluster_endpoint_private_access = true
+  # Security: enable private endpoint and public endpoint
+  endpoint_public_access  = true
+  endpoint_private_access = true
 
   # Auth mode required for Auto Mode
   authentication_mode = "API"
 
-  # Security: envelope encryption for secrets at rest
-  cluster_encryption_config = {
+  # Security: encryption for Kubernetes secrets at rest
+  encryption_config = {
     resources = ["secrets"]
   }
 
-  # Security: enable logging
-  cluster_enabled_log_types = [
+  # Security: enable control plane logging
+  enabled_log_types = [
     "api",
     "audit",
     "authenticator",
