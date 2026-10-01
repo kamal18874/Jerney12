@@ -13,9 +13,9 @@ echo "==========================================="
 echo "📦 Updating system packages..."
 sudo apt update && sudo apt upgrade -y
 
-# --- Install Node.js 20.x ---
-echo "📦 Installing Node.js 20.x..."
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+# --- Install Node.js 24.x ---
+echo "📦 Installing Node.js 24.x..."
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
 sudo apt install -y nodejs
 
 echo "Node.js version: $(node -v)"
