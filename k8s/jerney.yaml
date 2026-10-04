@@ -187,7 +187,7 @@ spec:
           effect: "NoSchedule"
       initContainers:
         - name: wait-for-db
-          image: busybox:1.36
+          image: busybox:1.38
           command:
             - sh
             - -c
@@ -200,7 +200,7 @@ spec:
               echo "DB is ready!"
       containers:
         - name: backend
-          image: ghcr.io/iam-veeramalla/Jerney/jerney-backend:75da1da
+          image: ghcr.io/kamal18874/Jerney12/jerney-backend:*
           ports:
             - containerPort: 5000
               protocol: TCP
@@ -307,7 +307,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: frontend
-          image: ghcr.io/iam-veeramalla/Jerney/jerney-frontend:75da1da
+          image: ghcr.io/kamal18874/Jerney12/jerney-frontend:*
           ports:
             - containerPort: 8080
               protocol: TCP
